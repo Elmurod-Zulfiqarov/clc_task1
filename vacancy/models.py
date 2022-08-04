@@ -20,6 +20,7 @@ class Company(BaseModel):
 
 class Category(BaseModel):
     title = models.CharField(max_length=128)
+    user = models.ManyToManyField(Worker, related_name="worker_category")
 
 
 class Vacancy(BaseModel):
