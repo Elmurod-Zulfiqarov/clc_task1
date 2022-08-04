@@ -42,17 +42,22 @@ class User(AbstractUser):
     twitter = models.CharField(max_length=256, null=True, blank=True)
     linkedln = models.CharField(max_length=256, null=True, blank=True)
 
-    flowwing = models.ManyToManyField("self", related_name="user_following", null=True, blank=True)
-    followers = models.ManyToManyField("self", related_name="user_follower", null=True, blank=True)
-    blocked_users = models.ManyToManyField("self", related_name="blocked_users", null=True, blank=True)
+    flowwing = models.ManyToManyField(
+        "self", related_name="user_following", null=True, blank=True)
+    followers = models.ManyToManyField(
+        "self", related_name="user_follower", null=True, blank=True)
+    blocked_users = models.ManyToManyField(
+        "self", related_name="blocked_users", null=True, blank=True)
 
     flowwing_count = models.PositiveIntegerField(null=True, blank=True)
     followers_count = models.PositiveIntegerField(null=True, blank=True)
     blocked_users_count = models.PositiveIntegerField(null=True, blank=True)
 
-    is_online = models.BooleanField(default=False) # view or @property in models
+    # view or @property in models
+    is_online = models.BooleanField(default=False)
 
-    created_at = models.DateTimeField(("date created"), auto_now_add=True, null=True)
+    created_at = models.DateTimeField(
+        ("date created"), auto_now_add=True, null=True)
     updated_at = models.DateTimeField(("date updated"), auto_now=True)
 
     # SETTINGS

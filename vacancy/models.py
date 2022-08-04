@@ -8,7 +8,6 @@ from helpers.models import BaseModel
 class Worker(BaseModel):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="worker")
-    awatar = models.ImageField(upload_to="worker/", null=True, blank=True)
     exprience = models.TextField(null=True, blank=True)
     from_salary = models.IntegerField()
     to_salary = models.IntegerField()
@@ -26,6 +25,6 @@ class Category(BaseModel):
 class Vacancy(BaseModel):
     title = models.CharField(max_length=128)
     company = models.ForeignKey(
-        Company, on_delete=models.CASCADE, related_name="vacany_company")
+        Company, on_delete=models.CASCADE, related_name="company")
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="vacany_category")
+        Category, on_delete=models.CASCADE, related_name="category")
