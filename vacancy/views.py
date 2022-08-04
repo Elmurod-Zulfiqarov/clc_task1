@@ -1,3 +1,6 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
 from rest_framework.generics import ListAPIView
 from .models import Vacancy, Category
 from .serializers import CategorySerializer, VacancySerializer
@@ -14,6 +17,10 @@ class VacansyView(ListAPIView):
             worker_count=models.Count("worker"),
         )
 
+    @method_decorator(cache_page(60*60*2))
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
+
 
 class CategoryView(ListAPIView):
     serializer_class = CategorySerializer
@@ -24,3 +31,7 @@ class CategoryView(ListAPIView):
             from_salary=models.Min('worker__salary'),
             to_salary=models.Max('worker__salary'),
         )
+
+    @method_decorator(cache_page(60*60*2))
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
