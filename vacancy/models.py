@@ -9,8 +9,8 @@ class Worker(BaseModel):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="worker")
     exprience = models.TextField(null=True, blank=True)
-    from_salary = models.IntegerField()
-    to_salary = models.IntegerField()
+    salary = models.IntegerField()
+    salary = models.IntegerField()
 
 
 class Company(BaseModel):
@@ -20,7 +20,7 @@ class Company(BaseModel):
 
 class Category(BaseModel):
     title = models.CharField(max_length=128)
-    user = models.ManyToManyField(Worker, related_name="worker_category")
+    worker = models.ManyToManyField(Worker, related_name="worker_category")
 
 
 class Vacancy(BaseModel):

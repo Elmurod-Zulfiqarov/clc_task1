@@ -19,4 +19,8 @@ class CategoryView(ListAPIView):
     serializer_class = CategorySerializer
 
     def get_queryset(self):
-        return Category.objects.aggregate(models.Count("worker_category"))
+        return Category.objects.all().annotate(
+            worker_count=models.Count("worker"),
+            from_salary=models.Min('worker__salary'),
+            to_salary=models.Max('worker__salary'),
+        )
